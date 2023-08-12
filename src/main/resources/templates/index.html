@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Spring Security Sample App</title>
+</head>
+
+<body>
+<h1>Spring Security Sample App</h1>
+<div sec:authorize="isAuthenticated()">
+    <h2>Login Success</h2>
+    <ul>
+        <li>Logged user: <span th:text="${#authentication.name}">Bob</span></li>
+        <li>Authority: <span th:text="${#authentication.authorities}">[READ, WRITE]</span></li>
+    </ul>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Log out" />
+    </form>
+</div>
+<div sec:authorize="isAnonymous()">
+    <a href="/login">Login</a>
+</div>
+</body>
+</html>
+
